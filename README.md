@@ -5,24 +5,24 @@
 
 # Getting Started (preparation)
 
-#####1. Generate CA private key:
+##### 1. Generate CA private key:
 ```
 openssl genrsa -des3 -out CA.key 2048
 ```
 *enter a passphrase for the key, in this example I used `mypass`*
 
 
-#####2. Generate CA certificate and sign with private CA key:
+##### 2. Generate CA certificate and sign with private CA key:
 ```
 openssl req -x509 -new -nodes -key CA.key -days 7300 -out CA.pem
 ```
 
-#####3 .Generate p12 file from CA key and CA cert (pem):
+##### 3 .Generate p12 file from CA key and CA cert (pem):
 ```
 openssl pkcs12 -export -in ~/CA.pem -inkey ~/CA.key -certfile ~/CA.pem -name "examplecert" -out CA.p12
 ```
 
-#####4. Generate trust store:
+##### 4. Generate trust store:
 ```
 keytool -import -file CA.pem -alias examplecert -keystore truststore.jks
 ```
